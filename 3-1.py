@@ -1,6 +1,3 @@
-import os.path
-import io
-
 input = "3-input.txt";
 
 input_file = open(input ,"r")
