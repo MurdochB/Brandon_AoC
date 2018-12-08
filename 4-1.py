@@ -5,14 +5,13 @@ input_file = open(input ,"r")
 # Sort file
 sorted_lines = sorted(input_file.readlines())
 
-
 sleep_dicts = {}
 sleep_count = {}
 
 guard = ""
 sleep_start = ""
 sleep_end = ""
-
+# add each period of sleep for each guard
 for line in sorted_lines:
     if("Guard" in line):
         guard = line[line.index("Guard #")+7:line.index(" begins")]
@@ -38,4 +37,16 @@ print "The biggest sleeper is: " + biggest_sleeper
 
 # Now find the most common time asleep
 
-print sleep_dicts[biggest_sleeper]
+# Add 1 to each minute the guard is asleep
+mins = [0 for i in range(60)]
+for sleep in sleep_dicts[biggest_sleeper]:
+    start_time = int(sleep[sleep.index("From ")+5:sleep.index(" To")])
+    end_time = int(sleep[sleep.index("To ")+3:])
+    for x in range(start_time, end_time):
+        mins[x] = mins[x] + 1
+
+
+most_common_sleep_time = mins.index(max(mins))
+
+print "Most common sleep time is: " + str(most_common_sleep_time)
+print "solution is : " + str(biggest_sleeper) + " * " + str(most_common_sleep_time)
