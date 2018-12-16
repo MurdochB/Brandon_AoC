@@ -1,37 +1,21 @@
-
-input = "37"
-elf1 = 0
-elf2 = 1
+recipes = "37"
+e1 = 0
+e2 = 1
 
 def createNewRecipes():
-    global input
-    newRecipe = int(input[elf1]) + int(input[elf2])
-    bonus = ""
-    if (newRecipe > 10):
-        newRecipe = newRecipe - 10
-        bonus = "1"
-    input = input + bonus
-    input = input + str(newRecipe)
+    global recipes
+    newRecipe = int(recipes[e1]) + int(recipes[e2])
+    recipes = recipes + str(newRecipe)
 
 def moveElves():
-    global elf1
-    global elf2
+    global e1
+    global e2
 
-    elf1ToMove = int(input[elf1]) + 1
-    while (elf1ToMove > 0):
-        elf1ToMove = elf1ToMove - 1
-        elf1 = elf1 + 1
-        if (elf1 >= len(input)):
-            elf1 = 0
-    elf2ToMove = int(input[elf2]) + 1
-    while (elf2ToMove > 0):
-        elf2ToMove = elf2ToMove - 1
-        elf2 = elf2 + 1
-        if (elf2 >= len(input)):
-            elf2 = 0
+    e1 = (e1 + (int(recipes[e1]) + 1)) % len(recipes)
+    e2 = (e2 + (int(recipes[e2]) + 1)) % len(recipes)
 
-while (len(input) < (165061 + 10)):
+while (len(recipes) < (165061 + 10)):
     createNewRecipes()
     moveElves()
-    # print "Recipes are now: " + input
-print input[len(input) - 10:]
+    # print "Recipes are now: " + recipes
+print recipes[len(recipes) - 10:]
